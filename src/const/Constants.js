@@ -1,0 +1,4 @@
+export const TRANSACTION_EXPENSE = "EXPENSE";
+export const TRANSACTION_EXPENSE_ID = "1";
+export const TRANSACTION_INCOME = "INCOME";
+export const TRANSACTION_INCOME_ID = "2";

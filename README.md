@@ -4,10 +4,10 @@
 
 1. Clone the repository:
 ```
-git clone 
+git clone https://github.com/ivyabe/expense-tracker.git
 ```
 
-2. Install all packages based on the `packge.json`:
+2. Install all packages based on the `package.json`:
 
 ```
 npm install
@@ -19,4 +19,4 @@ npm install
 npm run start
 ```
 
-4. http://localhost:8000/ to view
+4. To view, go to: http://localhost:8000/.
