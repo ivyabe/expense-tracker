@@ -6,18 +6,18 @@ import { getCategoriesByType } from "../service/CategoriesService";
 export default List = (props) => {
 
     const navigate = useNavigate();
-    const [selected, setSelected] = useState(TRANSACTION_EXPENSE_ID);
+    const [transactionType, setTransactionType] = useState(TRANSACTION_EXPENSE_ID);
     const [categories, setCategories] = useState([]);
 
     let { id } = useParams();
 
     useEffect(() => {
-        getCategoriesByType(selected).then((payload) => {
+        getCategoriesByType(transactionType).then((payload) => {
             setCategories(payload.data);
         }).catch((payload) => {
             console.log("Error: " + payload);
         });
-    }, [selected]);
+    }, [transactionType]);
 
     return (
         <div>
@@ -29,30 +29,30 @@ export default List = (props) => {
                                 <div className="card-body">
                                     <div className="row">
                                         <div className="col">
-                                            <h4>
+                                            <p class="card-text">
                                                 {category.name}
-                                            </h4>
+                                            </p>
                                         </div>
                                         <div className="col text-end">
-                                                <button
-                                                    className="btn btn-primary"
-                                                    onClick={() => {
-                                                        console.log(category.id)
-                                                        navigate(`/categories/${category.id}`);
-                                                    }}
-                                                >
-                                                    Edit
-                                                </button>
-                                                <button
-                                                    className="btn btn-danger ms-2"
-                                                    onClick={() => {
-                                                        // navigate(`/courses/${course.id}`);
-                                                        console.log("Delete")
-                                                    }}
-                                                >
-                                                    Delete
-                                                </button>
-                                            </div>
+                                            <button
+                                                className="btn btn-primary"
+                                                onClick={() => {
+                                                    console.log(category.id)
+                                                    navigate(`/categories/${category.id}`);
+                                                }}
+                                            >
+                                                Edit
+                                            </button>
+                                            <button
+                                                className="btn btn-danger ms-2"
+                                                onClick={() => {
+                                                    // navigate(`/courses/${course.id}`);
+                                                    console.log("Delete")
+                                                }}
+                                            >
+                                                Delete
+                                            </button>
+                                        </div>
                                     </div>
                                 </div>
                             </div>

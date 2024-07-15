@@ -1,5 +1,14 @@
 # Expense Tracker
 
+## Pre-requisite
+
+1. Clone backend:
+```
+git clone https://github.com/ivyabe/expense-tracker-api.git
+```
+
+-----
+
 ## Development Setup
 
 1. Clone the repository:
