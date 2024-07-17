@@ -4,8 +4,7 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "start": "node build.js --dev --watch",
-    "mock-server": "npx json-server db.json"
+    "start": "node build.js --dev --watch"
   },
   "author": "",
   "license": "ISC",

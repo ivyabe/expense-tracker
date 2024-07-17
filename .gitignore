@@ -1,3 +1,5 @@
 node_modules/
-public/assets/
+public/assets/styles
+public/assets/index.js
+public/assets/index.js.map
 .env

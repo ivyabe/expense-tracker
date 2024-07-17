@@ -1,5 +1,10 @@
 @import "../../node_modules/bootstrap/scss/bootstrap";
 
+.user-icon {
+  width: 5%;
+  margin-right: 2%;
+}
+
 .header {
   background-color: #a4c991;
   padding: 10px 20px;
@@ -7,4 +12,8 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+
+.btn-margin, .radio-margin {
+  margin-left: 1%;
 }

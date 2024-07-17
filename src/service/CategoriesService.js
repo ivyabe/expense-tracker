@@ -7,8 +7,28 @@ export const getCategories = (args) => {
     )
 }
 
-export const getCategoriesByType = (id) => {
+export const saveCategory = (category) => {
+    if (category.id) {
+        return axios.put(
+            `${API_BASE_URL}/category/${category.id}`,
+            category
+        )
+    } else {
+        return axios.post(
+            `${API_BASE_URL}/category`,
+            category
+        )
+    }
+}
+
+export const getCategory = (id) => {
     return axios.get(
-        `${API_BASE_URL}/categories?typeId=${id}`
+        `${API_BASE_URL}/category/${id}`
+    )
+}
+
+export const deleteCategory = (id) => {
+    return axios.delete(
+        `${API_BASE_URL}/category/${id}`
     )
 }
