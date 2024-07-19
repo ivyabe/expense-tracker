@@ -25,50 +25,52 @@ export default Login = () => {
 
     return (
         <div className="container">
-            <div className="mt-4"/>
-            <div className="card">
-                <div className="card-header">
-                    Login
+            <div className="mt-5"/>
+            <div className="card-group">
+                <div className="card border-0">
+                    <center>
+                        <img className="expenses-icon"
+                        src="./assets/img/expenses-icon.png">
+                        </img>
+                    </center>
                 </div>
-                <div className="card-body">
-                    <div className="form-group">
-                        <label>
-                            Username
-                        </label>
+                <div className="card border-0">
+                    <div className="form-group mt-5">
                         <input
                             value={username}
                             className={getInputClassName(errors, 'username')}
                             disabled={isLoading}
+                            placeholder="Username"
                             onChange={(event) => {
                                 setUsername(event.target.value);
                             }}
                         />
                         {renderInputErrors(errors, 'username')}
                     </div>
-                    <div className="mt-2"/>
-                    <div className="form-group">
-                        <label>
-                            Password
-                        </label>
-                        <input
-                            value={password}
-                            type="password"
-                            className={getInputClassName(errors, 'password')}
-                            disabled={isLoading}
-                            onChange={(event) => {
-                                setPassword(event.target.value);
-                            }}
-                        />
-                        {renderInputErrors(errors, 'password')}
+                    <div className="form-group mt-2">
+                         <input
+                             value={password}
+                             type="password"
+                             className={getInputClassName(errors, 'password')}
+                             disabled={isLoading}
+                             placeholder="Password"
+                             onChange={(event) => {
+                                 setPassword(event.target.value);
+                             }}
+                         />
+                         {renderInputErrors(errors, 'password')}
                     </div>
                     <hr/>
                     <button 
-                        className="btn btn-primary w-100"
-                        disabled={isLoading}
-                        onClick={handleLogin}
-                    >
-                        Login
-                    </button>
+                         className="btn btn-primary w-100 mb-3"
+                         disabled={isLoading}
+                         onClick={handleLogin}
+                     >
+                         Login
+                     </button>
+                     <a className="text-end" href="#">
+                        Sign-up?
+                     </a>
                 </div>
             </div>
         </div>

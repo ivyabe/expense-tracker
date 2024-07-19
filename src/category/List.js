@@ -1,28 +1,35 @@
 import React, { useState, useEffect } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { TRANSACTION_EXPENSE_ID } from "../const/Constants";
 import { BTN_ADD, BTN_EDIT, BTN_DELETE } from "../const/Constants";
 import { TRANSACTION_TYPE } from "../const/Defaults";
-import { getCategories, deleteCategory } from "../service/CategoriesService";
+import { getCategoriesByTransactionType, deleteCategory } from "../service/CategoriesService";
 import CommonModal from "../common/Modal"
+import { getCurrentUser } from "../service/AuthService";
 
 export default List = (props) => {
+
+    const currentUser = getCurrentUser();
 
     const navigate = useNavigate();
     const [categories, setCategories] = useState([]);
     const [isOpenModal, setIsOpenModal] = useState(false);
-    const [selectedTransactionType, setSelecredTransactionType] = useState(TRANSACTION_EXPENSE_ID);
+    const [selectedTransactionType, setSelectedTransactionType] = useState(TRANSACTION_EXPENSE_ID);
     const [transactionTypes, setTransactionTypes] = useState(TRANSACTION_TYPE);
     const [selectedCategory, setSelectedCategory] = useState([]);
     const [modalDetails, setModalDetails] = useState({});
 
     const loadCategories = () => {
-        getCategories().then((payload) => {
+        getCategoriesByTransactionType(selectedTransactionType).then((payload) => {
             setCategories(payload.data);
         }).catch((payload) => {
             console.log("Error: " + payload);
         });
     }
+
+    useEffect(() => {
+        setSelectedTransactionType(TRANSACTION_EXPENSE_ID)
+    }, []);
 
     useEffect(() => {
         loadCategories();
@@ -68,7 +75,7 @@ export default List = (props) => {
                                             console.log("Radio: " + event.target.value);
                                             let _selectedTransactionType = { ...selectedTransactionType};
                                             _selectedTransactionType = event.target.value;
-                                            setSelecredTransactionType(_selectedTransactionType);
+                                            setSelectedTransactionType(_selectedTransactionType);
                                         }}
                                     />
                                     <label className="radio-margin"> {type.name} </label><br></br>
@@ -85,6 +92,7 @@ export default List = (props) => {
                         >{BTN_ADD}</button>
                     </div>
                 </div>
+                <hr/>
                 {
                 categories.map((category) => {
                     return (

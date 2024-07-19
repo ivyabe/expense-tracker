@@ -1,11 +1,23 @@
 import axios from "axios";
 import { API_BASE_URL } from "env";
 
-export const getCategories = (args) => {
+// export const getCategories = (args) => {
+//     return axios.get(
+//         `${API_BASE_URL}/categories`
+//     )
+// }
+
+export const getCategoriesByTransactionType = (transactionTypeId) => {
     return axios.get(
-        `${API_BASE_URL}/categories`
+        `${API_BASE_URL}/categories/${transactionTypeId}`
     )
 }
+
+// export const getCategoriesByTransactionType = (userId, transactionTypeId) => {
+//     return axios.get(
+//         `${API_BASE_URL}/categories/user=${userId}/${transactionTypeId}/`
+//     )
+// }
 
 export const saveCategory = (category) => {
     if (category.id) {
