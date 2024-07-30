@@ -9,7 +9,7 @@ export default Header = () => {
     return (
         <React.Fragment>
             <header className="header">
-                <h1>Header</h1>
+                <h1>Expense Tracker</h1>
 
                 <div className="text-end">
                     Logged-in user: {currentUser.username}

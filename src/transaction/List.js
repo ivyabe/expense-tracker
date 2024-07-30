@@ -3,22 +3,22 @@ import { useNavigate } from "react-router-dom";
 import { TRANSACTION_EXPENSE_ID } from "../const/Constants";
 import { BTN_ADD, BTN_EDIT, BTN_DELETE } from "../const/Constants";
 import { TRANSACTION_TYPE } from "../const/Defaults";
-import { deleteCategory } from "../service/CategoriesService";
+import { deleteCategory, getCategory } from "../service/CategoriesService";
 import CommonModal from "../common/Modal"
-import { getTransactions } from "../service/TransactionsService";
+import { getTransactionsByTransactionType } from "../service/TransactionsService";
 
 export default List = (props) => {
 
     const navigate = useNavigate();
     const [transactions, setTransactions] = useState([]);
     const [isOpenModal, setIsOpenModal] = useState(false);
-    const [selectedTransactionType, setSelecredTransactionType] = useState(TRANSACTION_EXPENSE_ID);
+    const [selectedTransactionType, setSelectedTransactionType] = useState(TRANSACTION_EXPENSE_ID);
     const [transactionTypes, setTransactionTypes] = useState(TRANSACTION_TYPE);
     const [selectedTransaction, setSelectedTransaction] = useState([]);
     const [modalDetails, setModalDetails] = useState({});
 
     const loadTransactions = () => {
-        getTransactions().then((payload) => {
+        getTransactionsByTransactionType(selectedTransactionType).then((payload) => {
             setTransactions(payload.data);
         }).catch((payload) => {
             console.log("Error: " + payload);
@@ -33,6 +33,22 @@ export default List = (props) => {
         setIsOpenModal(false);
     }
 
+    const formatDate = (date) => {
+        return date.split("T")[0];
+    }
+
+    const displayText = (data) => {
+        if (data.note != null && data.note != "") {
+            return data.note;
+        } else {
+            getCategory(data.categoryId).then((payload) => {
+                console.log("Category Name: " + payload.data.name);
+                return payload.data.name;
+            }).catch((payload) => {
+                console.log("Error: " + payload);
+            })
+        }
+    }
     return (
         <React.Fragment>
             <CommonModal
@@ -49,11 +65,6 @@ export default List = (props) => {
                 }}
             >
             </CommonModal>
-        <div>
-            {transactions.length <= 0 ?
-            <center>
-                <p><a href="/#/category/add">Add</a> new transaction.</p>
-            </center> : 
             <div>
                 <div className="row">
                     <div className="col">
@@ -66,10 +77,9 @@ export default List = (props) => {
                                         name="transaction_type"
                                         checked={selectedTransactionType == type.id ? true : false}
                                         onChange={(event) => {
-                                            console.log("Radio: " + event.target.value);
                                             let _selectedTransactionType = { ...selectedTransactionType};
                                             _selectedTransactionType = event.target.value;
-                                            setSelecredTransactionType(_selectedTransactionType);
+                                            setSelectedTransactionType(_selectedTransactionType);
                                         }}
                                     />
                                     <label className="radio-margin"> {type.name} </label><br></br>
@@ -81,12 +91,18 @@ export default List = (props) => {
                         <button
                             className="btn btn-primary btn-sm mb-2"
                             onClick={() => {
-                                navigate("/transaction/add");
+                                navigate(`/transaction/add/type/${selectedTransactionType}`);
                             }}
                         >{BTN_ADD}</button>
                     </div>
                 </div>
+                <hr/>
                 {
+                transactions.length <= 0 ?
+                <center>
+                    <p><a href={`/#/transaction/add/type/${selectedTransactionType}`}>Add</a> new transaction.</p>
+                </center>
+                : 
                 transactions.map((transaction) => {
                     return (
                         <React.Fragment key={`transaction-${transaction.id}`}>
@@ -95,7 +111,17 @@ export default List = (props) => {
                                     <div className="row">
                                         <div className="col">
                                             <p className="card-text">
-                                                {transaction.note}
+                                                {formatDate(transaction.expenseDate)}
+                                            </p>
+                                        </div>
+                                        <div className="col">
+                                            <p className="card-text">
+                                                {displayText(transaction)}
+                                            </p>
+                                        </div>
+                                        <div className="col">
+                                            <p className="card-text">
+                                                {transaction.amount}
                                             </p>
                                         </div>
                                         <div className="col text-end">
@@ -130,8 +156,6 @@ export default List = (props) => {
                     })
                 }
             </div>
-            }
-        </div>
         </React.Fragment>
     )
 }

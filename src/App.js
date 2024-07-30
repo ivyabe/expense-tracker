@@ -5,8 +5,9 @@ import Login from "./Login";
 import Header from "./Header";
 import Dashboard from "./Dashboard";
 import TransactionsList from "./transaction/List";
+import TransactionForm from "./transaction/Form";
 import CategoriesList from "./category/List";
-import CategoryForm from "./category/Form"
+import CategoryForm from "./category/Form";
 
 export default App = (props) => {
     return (
@@ -27,11 +28,19 @@ export default App = (props) => {
                             element={<TransactionsList/>}
                         />
                         <Route
+                            path="/transaction/add/type/:typeId"
+                            element={<TransactionForm/>}
+                        />
+                        <Route
+                            path="/transaction/edit/:id"
+                            element={<TransactionForm/>}
+                        />
+                        <Route
                             path="/categories"
                             element={<CategoriesList/>}
                         />
                         <Route
-                            path="/category/add"
+                            path="/category/add/type/:typeId"
                             element={<CategoryForm/>}
                         />
                         <Route

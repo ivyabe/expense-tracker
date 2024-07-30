@@ -6,12 +6,20 @@ import { getInputClassName, renderInputErrors } from "../helpers/AppHelper";
 
 export default Form = (props) => {
 
-    let { id } = useParams();
+    let { typeId, id } = useParams();
     const navigate = useNavigate();
     const [category, setCategory] = useState(DEFAULT_CATEGORY);
     const [transactionTypes, setTransactionTypes] = useState(TRANSACTION_TYPE);
     const [isLoading, setIsLoading] = useState(false);
     const [errors, setErrors] = useState({});
+
+    useEffect(() => {
+        if (typeId) {
+            let _category = {...category};
+            _category.transactionTypeId = typeId;
+            setCategory(_category);
+        }
+    }, [typeId]);
 
     useEffect(() => {
         if (id) {
@@ -43,7 +51,7 @@ export default Form = (props) => {
                                 setCategory(_category);
                             }}
                         >
-                            <option value="" disabled> --- Select Transaction Type Category --- </option>
+                            {/* <option value="" disabled> --- Select Transaction Type --- </option> */}
                             {transactionTypes.map((type) => {
                                 return (
                                     <option value={type.id} key={`type-${type.id}`}>
@@ -70,7 +78,7 @@ export default Form = (props) => {
                         {renderInputErrors(errors, 'name')}
                     </div>
                 </div>
-                <div className="form-group row mt-3">
+                <div className="form-group row mt-4">
                     <label className="col-sm-2 col-form-label">Notes: </label>
                     <div className="col-sm-10">
                         <input

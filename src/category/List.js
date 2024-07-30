@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { TRANSACTION_EXPENSE_ID } from "../const/Constants";
-import { BTN_ADD, BTN_EDIT, BTN_DELETE } from "../const/Constants";
+import { BTN_ADD, BTN_EDIT, BTN_DELETE, BTN_VIEW } from "../const/Constants";
 import { TRANSACTION_TYPE } from "../const/Defaults";
 import { getCategoriesByTransactionType, deleteCategory } from "../service/CategoriesService";
 import CommonModal from "../common/Modal"
@@ -55,11 +55,6 @@ export default List = (props) => {
                 }}
             >
             </CommonModal>
-        <div>
-            {categories.length <= 0 ?
-            <center>
-                <p><a href="/#/category/add">Add</a> new category.</p>
-            </center> : 
             <div>
                 <div className="row">
                     <div className="col">
@@ -87,13 +82,18 @@ export default List = (props) => {
                         <button
                             className="btn btn-primary btn-sm mb-2"
                             onClick={() => {
-                                navigate("/category/add");
+                                navigate(`/category/add/type/${selectedTransactionType}`);
                             }}
                         >{BTN_ADD}</button>
                     </div>
                 </div>
                 <hr/>
                 {
+                categories.length <= 0 ?
+                <center>
+                    <p><a href={`/#/category/add/type/${selectedTransactionType}`}>Add</a> new category.</p>
+                </center>
+                : 
                 categories.map((category) => {
                     return (
                         <React.Fragment key={`category-${category.id}`}>
@@ -107,7 +107,16 @@ export default List = (props) => {
                                         </div>
                                         <div className="col text-end">
                                             <button
-                                                className="btn btn-primary btn-sm"
+                                                className="btn btn-warning btn-sm"
+                                                onClick={() => {
+                                                    // navigate(`/category/edit/${category.id}`);
+                                                    console.log("view")
+                                                }}
+                                            >
+                                                {BTN_VIEW}
+                                            </button>
+                                            <button
+                                                className="btn btn-primary btn-sm ms-2"
                                                 onClick={() => {
                                                     navigate(`/category/edit/${category.id}`);
                                                 }}
@@ -137,8 +146,6 @@ export default List = (props) => {
                     })
                 }
             </div>
-            }
-        </div>
         </React.Fragment>
     )
 }

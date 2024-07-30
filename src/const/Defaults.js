@@ -23,6 +23,17 @@ export const DEFAULT_CATEGORY = {
     notes: ""
 }
 
+export const DEFAULT_TRANSACTION = {
+    userId: "",
+    transactionTypeId: "",
+    categoryId: "",
+    expenseDate: "",
+    amount: "",
+    note: "",
+    file: "",
+    isDeleted: ""
+}
+
 export const DEFAULT_MODAL = {
     title: "",
     body: ""
