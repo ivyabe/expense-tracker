@@ -15,8 +15,7 @@ export default Login = () => {
             createSession(payload.data);
             window.location.reload();
         }).catch((payload) => {
-            console.log("Error in logging in");
-            console.log(payload);
+            console.log("Error: " + payload);
             setErrors(payload.response.data);
         }).finally(() => {
             setIsLoading(false);
@@ -68,7 +67,9 @@ export default Login = () => {
                      >
                          Login
                      </button>
-                     <a className="text-end" href="#">
+                     <a
+                        className="text-end"
+                        href="/#/register">
                         Sign-up?
                      </a>
                 </div>

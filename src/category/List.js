@@ -5,11 +5,8 @@ import { BTN_ADD, BTN_EDIT, BTN_DELETE, BTN_VIEW } from "../const/Constants";
 import { TRANSACTION_TYPE } from "../const/Defaults";
 import { getCategoriesByTransactionType, deleteCategory } from "../service/CategoriesService";
 import CommonModal from "../common/Modal"
-import { getCurrentUser } from "../service/AuthService";
 
 export default List = (props) => {
-
-    const currentUser = getCurrentUser();
 
     const navigate = useNavigate();
     const [categories, setCategories] = useState([]);

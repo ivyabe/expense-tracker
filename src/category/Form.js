@@ -3,6 +3,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import { DEFAULT_CATEGORY, TRANSACTION_TYPE } from '../const/Defaults';
 import { saveCategory, getCategory } from '../service/CategoriesService';
 import { getInputClassName, renderInputErrors } from "../helpers/AppHelper";
+import { BTN_SAVE, BTN_CANCEL } from "../const/Constants";
 
 export default Form = (props) => {
 
@@ -113,7 +114,7 @@ export default Form = (props) => {
                         })
                     }}
                 >
-                    Save
+                    { BTN_SAVE }
                 </button>
                 <button 
                     disabled={isLoading}
@@ -122,7 +123,7 @@ export default Form = (props) => {
                         navigate("/categories");
                     }}
                 >
-                    Cancel
+                    { BTN_CANCEL }
                 </button>
             </div>
         </div>

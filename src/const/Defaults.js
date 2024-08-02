@@ -3,6 +3,15 @@ export const DEFAULT_ERROR = {
     message: ""
 }
 
+export const DEFAULT_USER = {
+    firstName: "",
+    lastName: "",
+    email: "",
+    username: "",
+    password: "",
+    confirmPw: ""
+}
+
 export const TRANSACTION_TYPE = [{
     id: 1,
     name: "Expense"

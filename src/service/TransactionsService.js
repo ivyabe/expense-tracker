@@ -2,12 +2,6 @@ import axios from "axios";
 import { API_BASE_URL } from "env";
 import { buildAuthorizedHeaders } from "../helpers/AppHelper";
 
-// export const getTransactions = (args) => {
-//     return axios.get(
-//         `${API_BASE_URL}/transactions`
-//     )
-// }
-
 export const getTransactionsByTransactionType = (transactionTypeId) => {
     return axios.get(
         `${API_BASE_URL}/transactions/${transactionTypeId}`,
@@ -38,9 +32,9 @@ export const saveTransaction = (transaction) => {
     }
 }
 
-export const deleteTransaction = (id) => {
+export const softDeleteTransaction = (id) => {
     return axios.delete(
-        `${API_BASE_URL}/transaction/${id}`,
+        `${API_BASE_URL}/transaction/delete/${id}`,
         { headers: buildAuthorizedHeaders() }
     )
 }

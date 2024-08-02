@@ -3,8 +3,8 @@ import { useParams, useNavigate } from "react-router-dom";
 import { DEFAULT_TRANSACTION, TRANSACTION_TYPE } from '../const/Defaults';
 import { saveTransaction, getTransaction } from '../service/TransactionsService';
 import { getCategoriesByTransactionType } from "../service/CategoriesService";
-import { TRANSACTION_EXPENSE_ID } from "../const/Constants";
 import { getInputClassName, renderInputErrors } from "../helpers/AppHelper";
+import { BTN_SAVE, BTN_CANCEL } from "../const/Constants";
 
 export default Form = (props) => {
 
@@ -12,41 +12,39 @@ export default Form = (props) => {
     const navigate = useNavigate();
     const [transaction, setTransaction] = useState(DEFAULT_TRANSACTION);
     const [transactionTypes, setTransactionTypes] = useState(TRANSACTION_TYPE);
-    // const [selectedTransactionType, setSelectedTransactionType] = useState(TRANSACTION_EXPENSE_ID);
     const [categories, setCategories] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
     const [errors, setErrors] = useState({});
 
-    const loadCategories = () => {
-        getCategoriesByTransactionType(typeId).then((payload) => {
+    const loadCategories = (i) => {
+        getCategoriesByTransactionType(i).then((payload) => {
             setCategories(payload.data);
         }).catch((payload) => {
             console.log("Error: " + payload);
         });
     }
 
+    // Add
     useEffect(() => {
-        // Add
         if (typeId) {
             let _transaction = {...transaction};
             _transaction.transactionTypeId = typeId;
             setTransaction(_transaction);
+            loadCategories(typeId);
         }
+    }, [typeId]);
 
-        // Edit
+    // Edit
+    useEffect(() => {
         if (id) {
             getTransaction(id).then((payload) => {
                 setTransaction(payload.data);
+                loadCategories(payload.data.transactionTypeId);
             }).catch((payload) => {
                 console.log("Error: " + payload);
             })
         }
     }, [id]);
-
-    
-    useEffect(() => {
-        loadCategories();
-    }, [typeId]);
 
     return (
         <div>
@@ -108,7 +106,7 @@ export default Form = (props) => {
                     <div className="col-sm-10">
                         <input
                             type="date"
-                            value={transaction.expenseDate}
+                            value={transaction.expenseDate?.substr(0,10)}
                             disabled={isLoading}
                             className={getInputClassName(errors, 'expenseDate')}
                             onChange={(event) => {
@@ -177,7 +175,7 @@ export default Form = (props) => {
                         })
                     }}
                 >
-                    Save
+                    { BTN_SAVE }
                 </button>
                 <button 
                     disabled={isLoading}
@@ -186,7 +184,7 @@ export default Form = (props) => {
                         navigate("/transactions");
                     }}
                 >
-                    Cancel
+                    { BTN_CANCEL }
                 </button>
             </div>
         </div>

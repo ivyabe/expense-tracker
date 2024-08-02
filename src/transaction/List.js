@@ -5,7 +5,7 @@ import { BTN_ADD, BTN_EDIT, BTN_DELETE } from "../const/Constants";
 import { TRANSACTION_TYPE } from "../const/Defaults";
 import { deleteCategory, getCategory } from "../service/CategoriesService";
 import CommonModal from "../common/Modal"
-import { getTransactionsByTransactionType } from "../service/TransactionsService";
+import { softDeleteTransaction, getTransactionsByTransactionType } from "../service/TransactionsService";
 
 export default List = (props) => {
 
@@ -56,7 +56,7 @@ export default List = (props) => {
                 content={modalDetails}
                 handleClose={handleClose}
                 onConfirm={() => {
-                    deleteCategory(selectedTransaction.id).then((payload) => {
+                    softDeleteTransaction(selectedTransaction.id).then((payload) => {
                         loadTransactions();
                         handleClose();
                     }).catch((payload) => {
@@ -136,7 +136,6 @@ export default List = (props) => {
                                             <button
                                                 className="btn btn-danger btn-sm ms-2"
                                                 onClick={() => {
-                                                    console.log("Delete");
                                                     setSelectedTransaction(transaction);
                                                     let _modalDetails = { ...modalDetails};
                                                     _modalDetails.title = "Delete Transaction";

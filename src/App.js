@@ -1,6 +1,7 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
 import { isLoggedIn } from "./service/AuthService";
+import Register from "./Register";
 import Login from "./Login";
 import Header from "./Header";
 import Dashboard from "./Dashboard";
@@ -52,7 +53,17 @@ export default App = (props) => {
                 </React.Fragment>
                 :
                 <div>
-                    <Login/>
+                    {/* <Login/> */}
+                    <Routes>
+                        <Route
+                            path="/"
+                            element={<Login/>}
+                        />
+                        <Route
+                            path="/register"
+                            element={<Register/>}
+                        />
+                    </Routes>
                 </div>
             }
         </React.Fragment>
