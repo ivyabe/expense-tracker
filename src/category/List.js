@@ -107,8 +107,7 @@ export default List = (props) => {
                                             <button
                                                 className="btn btn-warning btn-sm"
                                                 onClick={() => {
-                                                    // navigate(`/category/edit/${category.id}`);
-                                                    console.log("view")
+                                                    navigate(`/category/${category.id}`);
                                                 }}
                                             >
                                                 {BTN_VIEW}

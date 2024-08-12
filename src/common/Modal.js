@@ -34,6 +34,7 @@ export default CommonModal = (props) => {
                         <Button 
                             variant="primary" 
                             onClick={onConfirm}
+                            className="modal-btn-left"
                         >
                             {BTN_CONFIRM}
                         </Button>

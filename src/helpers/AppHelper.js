@@ -29,5 +29,20 @@ export const buildAuthorizedHeaders = () => {
     'Authorization': `Bearer ${getToken()}`
   }
 }
-  
+
+export const formatDate = (date) => {
+  return date.split("T")[0];
+}
+
+export const displayText = (data) => {
+  if (data.note != null && data.note != "") {
+      return data.note;
+  } else {
+      getCategory(data.categoryId).then((payload) => {
+          return payload.data.name;
+      }).catch((payload) => {
+          console.log("Error: " + payload);
+      })
+  }
+}
   

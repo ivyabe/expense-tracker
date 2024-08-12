@@ -6,6 +6,7 @@ import { TRANSACTION_TYPE } from "../const/Defaults";
 import { getCategory } from "../service/CategoriesService";
 import CommonModal from "../common/Modal"
 import { softDeleteTransaction, getTransactionsByTransactionType } from "../service/TransactionsService";
+import { displayText, formatDate } from "../helpers/AppHelper";
 
 export default List = (props) => {
 
@@ -33,22 +34,6 @@ export default List = (props) => {
         setIsOpenModal(false);
     }
 
-    const formatDate = (date) => {
-        return date.split("T")[0];
-    }
-
-    const displayText = (data) => {
-        if (data.note != null && data.note != "") {
-            return data.note;
-        } else {
-            getCategory(data.categoryId).then((payload) => {
-                console.log("Category Name: " + payload.data.name);
-                return payload.data.name;
-            }).catch((payload) => {
-                console.log("Error: " + payload);
-            })
-        }
-    }
     return (
         <React.Fragment>
             <CommonModal

@@ -18,7 +18,7 @@ export default Header = () => {
                         Logged-in user: {currentUser.username}
 
                         <button
-                            className="btn btn-danger btn-sm"
+                            className="btn btn-danger btn-sm btn-logout"
                             onClick={() => {
                                 destroySession();
                                 navigate("/");

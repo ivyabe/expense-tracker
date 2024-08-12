@@ -4,7 +4,14 @@ import { buildAuthorizedHeaders } from "../helpers/AppHelper";
 
 export const getTransactionsByTransactionType = (transactionTypeId) => {
     return axios.get(
-        `${API_BASE_URL}/transactions/${transactionTypeId}`,
+        `${API_BASE_URL}/transactions/type/${transactionTypeId}`,
+        { headers: buildAuthorizedHeaders() }
+    )
+}
+
+export const getTransactionsByCategoryId = (categoryId) => {
+    return axios.get(
+        `${API_BASE_URL}/transactions/category/${categoryId}`,
         { headers: buildAuthorizedHeaders() }
     )
 }
