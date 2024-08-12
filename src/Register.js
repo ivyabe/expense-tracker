@@ -5,16 +5,30 @@ import { getInputClassName, renderInputErrors } from "./helpers/AppHelper";
 import Header from "./Header";
 import { BTN_CANCEL, BTN_REGISTER } from "./const/Constants";
 import { addUser } from "./service/UserService";
+import CommonModal from "./common/Modal";
 
 export default Register = () => {
     const navigate = useNavigate();
     const [user, setUser] = useState(DEFAULT_USER);
     const [isLoading, setIsLoading] = useState(false);
     const [errors, setErrors] = useState({});
+    const [isOpenModal, setIsOpenModal] = useState(false);
+    const [modalDetails, setModalDetails] = useState({});
 
     return (
         <React.Fragment>
             <Header/>
+            <CommonModal
+                show={isOpenModal}
+                content={modalDetails}
+                handleClose=""
+                onConfirm=""
+                back={() => {
+                    setUser(DEFAULT_USER);
+                    navigate("/");
+                }}
+            >
+            </CommonModal>
             <div className="container">
                 <div className="mt-4"/>
                 <h3> Sign-in: </h3>
@@ -129,9 +143,11 @@ export default Register = () => {
                             setIsLoading(true);
                             setErrors({});
                             addUser({...user}).then((payload) => {
-                                setUser(DEFAULT_USER);
-                                // display success modal
-                                navigate("/");
+                                let _modalDetails = { ...modalDetails};
+                                _modalDetails.title = "Sign-in Success";
+                                _modalDetails.body = "Success! You are now registered.";
+                                setModalDetails(_modalDetails);
+                                setIsOpenModal(true);
                             }).catch((payload) => {
                                 console.log("Error: " + payload);
                                 setErrors(payload.response.data);

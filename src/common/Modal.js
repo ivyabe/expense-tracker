@@ -1,6 +1,8 @@
 import Modal from 'react-bootstrap/Modal';
-import React from "react";
+import React from "react";BTN_CONFIRM
 import Button from 'react-bootstrap/Button';
+import { isLoggedIn } from '../service/AuthService';
+import { BTN_OK, BTN_CLOSE, BTN_CONFIRM, BTN_ADD,  } from '../const/Constants';
 
 export default CommonModal = (props) => {
 
@@ -8,7 +10,8 @@ export default CommonModal = (props) => {
         show,
         content,
         handleClose,
-        onConfirm
+        onConfirm,
+        back
     } = props;
 
     return (
@@ -22,15 +25,24 @@ export default CommonModal = (props) => {
                 {content.body}
             </Modal.Body>
             <Modal.Footer>
-                <Button variant="secondary" onClick={handleClose}>
-                    Close
-                </Button>
-                <Button 
-                    variant="primary" 
-                    onClick={onConfirm}
-                >
-                    Confirm
-                </Button>
+                {
+                    isLoggedIn() ? 
+                    <div>
+                        <Button variant="secondary" onClick={handleClose}>
+                            {BTN_CLOSE}
+                        </Button>
+                        <Button 
+                            variant="primary" 
+                            onClick={onConfirm}
+                        >
+                            {BTN_CONFIRM}
+                        </Button>
+                    </div>
+                    :
+                    <Button variant="secondary" onClick={back}>
+                            {BTN_OK}
+                    </Button>
+                }
             </Modal.Footer>
         </Modal>
     )

@@ -50,6 +50,7 @@ export default List = (props) => {
                         console.log("Error: " + payload);
                     })
                 }}
+                back=""
             >
             </CommonModal>
             <div>

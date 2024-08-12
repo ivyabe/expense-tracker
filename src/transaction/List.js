@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { TRANSACTION_EXPENSE_ID } from "../const/Constants";
 import { BTN_ADD, BTN_EDIT, BTN_DELETE } from "../const/Constants";
 import { TRANSACTION_TYPE } from "../const/Defaults";
-import { deleteCategory, getCategory } from "../service/CategoriesService";
+import { getCategory } from "../service/CategoriesService";
 import CommonModal from "../common/Modal"
 import { softDeleteTransaction, getTransactionsByTransactionType } from "../service/TransactionsService";
 
@@ -63,6 +63,7 @@ export default List = (props) => {
                         console.log("Error: " + payload);
                     })
                 }}
+                back=""
             >
             </CommonModal>
             <div>
