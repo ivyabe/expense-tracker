@@ -60,7 +60,7 @@ export default Dashboard = () => {
                         </div>
                         <div className="col">
                             <p className="card-text">
-                                {totalIncome}
+                                ₱ {totalIncome}
                             </p>
                         </div>
                     </div>
@@ -73,7 +73,7 @@ export default Dashboard = () => {
                         </div>
                         <div className="col">
                             <p className="card-text">
-                                {totalExpense}
+                                ₱ {totalExpense}
                             </p>
                         </div>
                     </div>
@@ -86,7 +86,7 @@ export default Dashboard = () => {
                         </div>
                         <div className="col">
                             <p className="card-text">
-                                {computeBalance()}
+                                ₱ {computeBalance()}
                             </p>
                         </div>
                     </div>

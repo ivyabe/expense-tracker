@@ -5,7 +5,7 @@ import { saveCategory, getCategory } from '../service/CategoriesService';
 import { getInputClassName, renderInputErrors } from "../helpers/AppHelper";
 import { BTN_SAVE, BTN_CANCEL } from "../const/Constants";
 
-export default Form = (props) => {
+export default Form = () => {
 
     let { typeId, id } = useParams();
     const navigate = useNavigate();
@@ -44,7 +44,7 @@ export default Form = (props) => {
                     <div className="col-sm-10">
                         <select
                             className="form-control"
-                            disabled={isLoading}
+                            disabled
                             value={category.transactionTypeId}
                             onChange={(event) => {
                                 let _category = {...category};
@@ -52,7 +52,6 @@ export default Form = (props) => {
                                 setCategory(_category);
                             }}
                         >
-                            {/* <option value="" disabled> --- Select Transaction Type --- </option> */}
                             {transactionTypes.map((type) => {
                                 return (
                                     <option value={type.id} key={`type-${type.id}`}>

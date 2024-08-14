@@ -2,7 +2,7 @@ import Modal from 'react-bootstrap/Modal';
 import React from "react";BTN_CONFIRM
 import Button from 'react-bootstrap/Button';
 import { isLoggedIn } from '../service/AuthService';
-import { BTN_OK, BTN_CLOSE, BTN_CONFIRM, BTN_ADD,  } from '../const/Constants';
+import { BTN_OK, BTN_CLOSE, BTN_CONFIRM } from '../const/Constants';
 
 export default CommonModal = (props) => {
 

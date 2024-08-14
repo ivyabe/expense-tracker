@@ -9,7 +9,7 @@ import TransactionsList from "./transaction/List";
 import TransactionForm from "./transaction/Form";
 import CategoriesList from "./category/List";
 import CategoryForm from "./category/Form";
-import CategoryDetails from "./category/Details";
+import CategoryView from "./category/View";
 
 export default App = (props) => {
     return (
@@ -51,7 +51,7 @@ export default App = (props) => {
                         />
                         <Route
                             path="/category/:id"
-                            element={<CategoryDetails/>}
+                            element={<CategoryView/>}
                         />
                     </Routes>
                     </div>

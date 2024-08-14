@@ -6,7 +6,7 @@ import { getCategoriesByTransactionType } from "../service/CategoriesService";
 import { getInputClassName, renderInputErrors } from "../helpers/AppHelper";
 import { BTN_SAVE, BTN_CANCEL } from "../const/Constants";
 
-export default Form = (props) => {
+export default Form = () => {
 
     let { typeId, id } = useParams();
     const navigate = useNavigate();
@@ -66,7 +66,6 @@ export default Form = (props) => {
                                 setTransaction(_transaction);
                             }}
                         >
-                            {/* <option value="" disabled> --- Select Transaction Type --- </option> */}
                             {transactionTypes.map((type) => {
                                 return (
                                     <option value={type.id} key={`type-${type.id}`}>
@@ -81,7 +80,7 @@ export default Form = (props) => {
                     <label className="col-sm-2 col-form-label">Category: </label>
                     <div className="col-sm-10">
                         <select
-                            className="form-control"
+                            className={getInputClassName(errors, 'categoryId')}
                             disabled={isLoading}
                             value={transaction.categoryId}
                             onChange={(event) => {
@@ -99,6 +98,7 @@ export default Form = (props) => {
                                 )
                             })}
                         </select>
+                        {renderInputErrors(errors, 'categoryId')}
                     </div>
                 </div>
                 <div className="form-group row mt-4">
@@ -149,12 +149,12 @@ export default Form = (props) => {
                         />
                     </div>
                 </div>
-                <div className="form-group row mt-4">
+                {/* <div className="form-group row mt-4">
                     <label className="col-sm-2 col-form-label">Attach File: </label>
                     <div className="col-sm-10">
                         <input className="form-control" type="file" id="formFile" />
                     </div>
-                </div>
+                </div> */}
             </form>
             <div className="form-group text-end mt-4">
                 <button 

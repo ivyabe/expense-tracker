@@ -6,7 +6,7 @@ import { TRANSACTION_TYPE } from "../const/Defaults";
 import { getCategoriesByTransactionType, deleteCategory } from "../service/CategoriesService";
 import CommonModal from "../common/Modal"
 
-export default List = (props) => {
+export default List = () => {
 
     const navigate = useNavigate();
     const [categories, setCategories] = useState([]);

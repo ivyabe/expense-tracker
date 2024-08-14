@@ -6,7 +6,7 @@ import { getTransactionsByCategoryId } from "../service/TransactionsService";
 import { BTN_BACK } from "../const/Constants";
 import { formatDate, displayText } from "../helpers/AppHelper";
 
-export default Details = (props) => {
+export default View = () => {
 
     let { id } = useParams();
     const navigate = useNavigate();
@@ -52,7 +52,7 @@ export default Details = (props) => {
                                     </div>
                                     <div className="col">
                                         <p className="card-text">
-                                            {displayText(transaction)}
+                                            {displayText(transaction, category.name)}
                                         </p>
                                     </div>
                                     <div className="col">

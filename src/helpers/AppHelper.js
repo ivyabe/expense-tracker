@@ -1,5 +1,6 @@
 import React from "react";
 import {getToken} from "../service/AuthService";
+import { getCategory } from "../service/CategoriesService";
 
 export const hasFormError = (errors, key) => {
     return errors[key] && errors[key].length > 0;
@@ -34,15 +35,11 @@ export const formatDate = (date) => {
   return date.split("T")[0];
 }
 
-export const displayText = (data) => {
-  if (data.note != null && data.note != "") {
-      return data.note;
-  } else {
-      getCategory(data.categoryId).then((payload) => {
-          return payload.data.name;
-      }).catch((payload) => {
-          console.log("Error: " + payload);
-      })
+export const displayText = (data, name) => {
+  let text = data.note;
+  if (text == null || text == "") {
+    text = name ? name : data.category.name
   }
+  return text;
 }
   
