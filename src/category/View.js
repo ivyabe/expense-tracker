@@ -4,7 +4,7 @@ import { DEFAULT_CATEGORY } from "../const/Defaults";
 import { getCategory } from "../service/CategoriesService";
 import { getTransactionsByCategoryId } from "../service/TransactionsService";
 import { BTN_BACK } from "../const/Constants";
-import { formatDate, displayText } from "../helpers/AppHelper";
+import { formatDate, displayText, compute } from "../helpers/AppHelper";
 
 export default View = () => {
 
@@ -12,6 +12,7 @@ export default View = () => {
     const navigate = useNavigate();
     const [category, setCategory] = useState(DEFAULT_CATEGORY);
     const [transactions, setTransactions] = useState([]);
+    const [total, setTotal] = useState("0");
 
     useEffect(() => {
         getCategory(id).then((payload) => {
@@ -27,10 +28,14 @@ export default View = () => {
         })
     }, [id]);
 
+    useEffect(() => {
+        setTotal(compute(transactions));
+    }, [transactions])
+
     return (
         <React.Fragment>
             <h5>
-                {category.name}
+                {category.name} - ₱ {total}
             </h5>
             <hr/>
             {
@@ -70,7 +75,7 @@ export default View = () => {
             <hr/>
             <div className="form-group text-end mt-4">
                 <button
-                    className="btn btn-warning btn-margin"
+                    className="btn btn-sm btn-warning btn-margin"
                     onClick={() => {
                         navigate("/categories");
                     }}

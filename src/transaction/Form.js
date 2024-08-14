@@ -122,6 +122,7 @@ export default Form = () => {
                     <label className="col-sm-2 col-form-label">Amount: </label>
                     <div className="col-sm-10">
                         <input
+                            type="number"
                             value={transaction.amount}
                             disabled={isLoading}
                             className={getInputClassName(errors, 'amount')}

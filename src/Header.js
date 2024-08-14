@@ -1,6 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import Navigation from "./Navigation";
+import DateNav from "./DateNav";
 import { getCurrentUser, destroySession, isLoggedIn } from "./service/AuthService";
 
 export default Header = () => {
@@ -36,7 +37,12 @@ export default Header = () => {
             </header>
             <div className="mt-2"/>
             {
-                isLoggedIn() ? <Navigation/> : ""
+                isLoggedIn() ? 
+                <React.Fragment>
+                    {/* <DateNav/> */}
+                    <Navigation/>
+                </React.Fragment>
+                : ""
             }
         </React.Fragment>
     )

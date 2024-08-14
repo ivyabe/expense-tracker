@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { getTransactionsByTransactionType } from "./service/TransactionsService";
+import { compute } from "./helpers/AppHelper";
 
 export default Dashboard = () => {
     const [incomeTransactions, setIncomeTransactions] = useState([]);
@@ -36,13 +37,13 @@ export default Dashboard = () => {
         });
     }
 
-    const compute = (transactions) => {
-        let total = 0;
-        transactions.forEach(t => {
-            total += parseInt(t.amount);
-        });
-        return total;
-    }
+    // const compute = (transactions) => {
+    //     let total = 0;
+    //     transactions.forEach(t => {
+    //         total += parseInt(t.amount);
+    //     });
+    //     return total;
+    // }
 
     const computeBalance = () => {
         return totalIncome - totalExpense;

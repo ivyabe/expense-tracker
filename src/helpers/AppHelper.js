@@ -31,6 +31,14 @@ export const buildAuthorizedHeaders = () => {
   }
 }
 
+export const compute = (transactions) => {
+  let total = 0;
+  transactions.forEach(t => {
+      total += parseInt(t.amount);
+  });
+  return total;
+}
+
 export const formatDate = (date) => {
   return date.split("T")[0];
 }

@@ -106,7 +106,7 @@ export default List = () => {
                                         </div>
                                         <div className="col">
                                             <p className="card-text">
-                                                {transaction.amount}
+                                                ₱ {transaction.amount}
                                             </p>
                                         </div>
                                         <div className="col text-end">
